@@ -22,7 +22,7 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <p className="font-mono text-cyan text-sm tracking-[0.2em] uppercase mb-3">
+          <p className="font-mono text-orange-500 text-sm tracking-[0.2em] uppercase mb-3">
             Who We Are
           </p>
           <h2 className="text-3xl md:text-5xl font-bold font-mono">
@@ -38,8 +38,8 @@ export default function About() {
           className="glass-card rounded-xl p-8 md:p-12"
         >
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-2 h-2 rounded-full bg-cyan animate-pulse" />
-            <span className="font-mono text-cyan text-xs tracking-widest uppercase">
+            <div className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
+            <span className="font-mono text-orange-500 text-xs tracking-widest uppercase">
               About // Sam
             </span>
           </div>
@@ -47,7 +47,7 @@ export default function About() {
           <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
             I&apos;m Sam. I spent 7 years building enterprise software at Trimble,
             owning a platform that processed{" "}
-            <span className="text-cyan font-semibold">5 million messages a day</span>.
+            <span className="text-orange-500 font-semibold">5 million messages a day</span>.
             Now I build AI agents for businesses in Cleveland.
           </p>
 

@@ -7,7 +7,6 @@ const navLinks = [
   { label: "Products", href: "#products" },
   { label: "How It Works", href: "#how-it-works" },
   { label: "About", href: "#about" },
-  { label: "Pricing", href: "#pricing" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -34,7 +33,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <a href="#" className="flex items-center gap-2">
-          <span className="font-mono text-xl font-bold text-cyan tracking-wider">
+          <span className="font-mono text-xl font-bold text-orange-500 tracking-wider">
             216
           </span>
           <span className="font-mono text-xl font-bold text-foreground">
@@ -48,14 +47,14 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-gray-400 hover:text-cyan transition-colors font-mono"
+              className="text-sm text-gray-400 hover:text-orange-500 transition-colors font-mono"
             >
               {link.label}
             </a>
           ))}
           <a
             href="#contact"
-            className="glow-btn relative z-10 bg-cyan/10 text-cyan border border-cyan/30 px-5 py-2 rounded font-mono text-sm hover:bg-cyan/20 transition-all"
+            className="glow-btn relative z-10 bg-orange-500/10 text-orange-400 border border-orange-500/30 px-5 py-2 rounded font-mono text-sm hover:bg-orange-500/20 transition-all"
           >
             Book a Call
           </a>
@@ -64,7 +63,7 @@ export default function Navbar() {
         {/* Mobile toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-gray-400 hover:text-cyan transition-colors"
+          className="md:hidden text-gray-400 hover:text-orange-500 transition-colors"
           aria-label="Toggle menu"
         >
           <svg
@@ -99,7 +98,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="text-sm text-gray-400 hover:text-cyan transition-colors font-mono"
+                  className="text-sm text-gray-400 hover:text-orange-500 transition-colors font-mono"
                 >
                   {link.label}
                 </a>
@@ -107,7 +106,7 @@ export default function Navbar() {
               <a
                 href="#contact"
                 onClick={() => setMobileOpen(false)}
-                className="glow-btn relative z-10 bg-cyan/10 text-cyan border border-cyan/30 px-5 py-2 rounded font-mono text-sm text-center hover:bg-cyan/20 transition-all"
+                className="glow-btn relative z-10 bg-orange-500/10 text-orange-400 border border-orange-500/30 px-5 py-2 rounded font-mono text-sm text-center hover:bg-orange-500/20 transition-all"
               >
                 Book a Call
               </a>

@@ -17,7 +17,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <p className="font-mono text-cyan text-sm tracking-[0.3em] uppercase mb-6">
+          <p className="font-mono text-orange-500 text-sm tracking-[0.3em] uppercase mb-6">
             Cleveland, OH
           </p>
         </motion.div>
@@ -29,7 +29,7 @@ export default function Hero() {
           className="text-5xl md:text-7xl lg:text-8xl font-bold font-mono leading-tight mb-6"
         >
           <span className="text-foreground">We build </span>
-          <span className="text-cyan text-glow">AI</span>
+          <span className="text-orange-500 text-glow">AI</span>
           <br />
           <span className="text-foreground">that runs your</span>
           <br />
@@ -54,13 +54,13 @@ export default function Hero() {
         >
           <a
             href="#products"
-            className="glow-btn relative z-10 bg-cyan text-background font-mono font-semibold px-8 py-4 rounded text-sm tracking-wide hover:brightness-110 transition-all animate-pulse-glow"
+            className="glow-btn relative z-10 bg-orange-500 text-background font-mono font-semibold px-8 py-4 rounded text-sm tracking-wide hover:brightness-110 transition-all animate-pulse-glow"
           >
             See What We Build
           </a>
           <a
             href="#contact"
-            className="glow-btn relative z-10 bg-transparent text-cyan border border-cyan/40 font-mono font-semibold px-8 py-4 rounded text-sm tracking-wide hover:bg-cyan/10 transition-all"
+            className="glow-btn relative z-10 bg-transparent text-orange-500 border border-cyan/40 font-mono font-semibold px-8 py-4 rounded text-sm tracking-wide hover:bg-orange-500/10 transition-all"
           >
             Book a Call
           </a>
@@ -76,9 +76,9 @@ export default function Hero() {
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="w-5 h-8 border border-cyan/30 rounded-full flex justify-center pt-1.5"
+            className="w-5 h-8 border border-orange-500/30 rounded-full flex justify-center pt-1.5"
           >
-            <div className="w-1 h-2 bg-cyan/50 rounded-full" />
+            <div className="w-1 h-2 bg-orange-500/50 rounded-full" />
           </motion.div>
         </motion.div>
       </div>

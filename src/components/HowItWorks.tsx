@@ -52,7 +52,7 @@ export default function HowItWorks() {
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
-          <p className="font-mono text-cyan text-sm tracking-[0.2em] uppercase mb-3">
+          <p className="font-mono text-orange-500 text-sm tracking-[0.2em] uppercase mb-3">
             System Boot Sequence
           </p>
           <h2 className="text-3xl md:text-5xl font-bold font-mono">
@@ -73,10 +73,10 @@ export default function HowItWorks() {
               transition={{ duration: 0.5, delay: i * 0.15 }}
               className="relative text-center"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-cyan/5 border border-cyan/20 text-cyan mb-6 relative z-10">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-orange-500/5 border border-orange-500/20 text-orange-500 mb-6 relative z-10">
                 {step.icon}
               </div>
-              <p className="font-mono text-cyan/50 text-xs tracking-widest mb-2">
+              <p className="font-mono text-orange-500/50 text-xs tracking-widest mb-2">
                 {step.number}
               </p>
               <h3 className="text-xl font-bold font-mono mb-3">{step.title}</h3>

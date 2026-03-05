@@ -56,7 +56,7 @@ export default function Pricing() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="font-mono text-cyan text-sm tracking-[0.2em] uppercase mb-3">
+          <p className="font-mono text-orange-500 text-sm tracking-[0.2em] uppercase mb-3">
             Pricing
           </p>
           <h2 className="text-3xl md:text-5xl font-bold font-mono">
@@ -77,12 +77,12 @@ export default function Pricing() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className={`glass-card rounded-xl p-8 relative ${
                 tier.accent
-                  ? "border-cyan/30 shadow-[0_0_30px_rgba(0,240,255,0.1)]"
+                  ? "border-orange-500/30 shadow-[0_0_30px_rgba(255,111,0,0.1)]"
                   : ""
               }`}
             >
               {tier.accent && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-cyan text-background text-xs font-mono font-bold px-3 py-1 rounded">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-orange-500 text-background text-xs font-mono font-bold px-3 py-1 rounded">
                   Most Popular
                 </div>
               )}
@@ -112,7 +112,7 @@ export default function Pricing() {
                       height="16"
                       viewBox="0 0 16 16"
                       fill="none"
-                      className="text-cyan shrink-0"
+                      className="text-orange-500 shrink-0"
                     >
                       <path
                         d="M4 8l3 3 5-6"
@@ -131,8 +131,8 @@ export default function Pricing() {
                 href="#contact"
                 className={`block text-center font-mono text-sm py-3 rounded transition-all ${
                   tier.accent
-                    ? "bg-cyan text-background font-semibold hover:brightness-110"
-                    : "bg-white/5 text-gray-300 border border-white/10 hover:border-cyan/30 hover:text-cyan"
+                    ? "bg-orange-500 text-background font-semibold hover:brightness-110"
+                    : "bg-white/5 text-gray-300 border border-white/10 hover:border-cyan/30 hover:text-orange-500"
                 }`}
               >
                 {tier.name === "Custom" ? "Book a Call" : "Get Started"}

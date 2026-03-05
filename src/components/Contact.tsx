@@ -11,12 +11,37 @@ export default function Contact() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Connect to Formspree, Resend, or Firebase Function
-    console.log("Form submitted:", formData);
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({ name: "", business: "", phone: "", message: "" });
+      } else {
+        setError(data.error || "Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setError("Failed to send message. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -47,7 +72,7 @@ export default function Contact() {
           >
             {submitted ? (
               <div className="glass-card rounded-xl p-8 text-center">
-                <div className="text-cyan text-4xl mb-4">
+                <div className="text-orange-500 text-4xl mb-4">
                   <svg
                     viewBox="0 0 48 48"
                     fill="none"
@@ -70,6 +95,11 @@ export default function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
+                {error && (
+                  <div className="bg-red-500/10 border border-red-500/30 rounded p-4 text-red-400 text-sm font-mono">
+                    {error}
+                  </div>
+                )}
                 <div>
                   <label className="block text-xs font-mono text-gray-500 mb-2 tracking-wide uppercase">
                     Name
@@ -81,7 +111,7 @@ export default function Contact() {
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
-                    className="w-full bg-surface border border-white/10 rounded px-4 py-3 text-foreground font-mono text-sm focus:outline-none focus:border-cyan/50 transition-colors"
+                    className="w-full bg-surface border border-white/10 rounded px-4 py-3 text-foreground font-mono text-sm focus:outline-none focus:border-orange-500/50 transition-colors"
                     placeholder="Your name"
                   />
                 </div>
@@ -96,7 +126,7 @@ export default function Contact() {
                     onChange={(e) =>
                       setFormData({ ...formData, business: e.target.value })
                     }
-                    className="w-full bg-surface border border-white/10 rounded px-4 py-3 text-foreground font-mono text-sm focus:outline-none focus:border-cyan/50 transition-colors"
+                    className="w-full bg-surface border border-white/10 rounded px-4 py-3 text-foreground font-mono text-sm focus:outline-none focus:border-orange-500/50 transition-colors"
                     placeholder="Your business name"
                   />
                 </div>
@@ -111,7 +141,7 @@ export default function Contact() {
                     onChange={(e) =>
                       setFormData({ ...formData, phone: e.target.value })
                     }
-                    className="w-full bg-surface border border-white/10 rounded px-4 py-3 text-foreground font-mono text-sm focus:outline-none focus:border-cyan/50 transition-colors"
+                    className="w-full bg-surface border border-white/10 rounded px-4 py-3 text-foreground font-mono text-sm focus:outline-none focus:border-orange-500/50 transition-colors"
                     placeholder="(216) 555-0000"
                   />
                 </div>
@@ -126,15 +156,16 @@ export default function Contact() {
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
                     }
-                    className="w-full bg-surface border border-white/10 rounded px-4 py-3 text-foreground font-mono text-sm focus:outline-none focus:border-cyan/50 transition-colors resize-none"
+                    className="w-full bg-surface border border-white/10 rounded px-4 py-3 text-foreground font-mono text-sm focus:outline-none focus:border-orange-500/50 transition-colors resize-none"
                     placeholder="Tell us what's costing you time or money..."
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full glow-btn relative z-10 bg-cyan text-background font-mono font-semibold px-8 py-4 rounded text-sm tracking-wide hover:brightness-110 transition-all"
+                  disabled={loading}
+                  className="w-full glow-btn relative z-10 bg-orange-500 text-background font-mono font-semibold px-8 py-4 rounded text-sm tracking-wide hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Send Message
+                  {loading ? "Sending..." : "Send Message"}
                 </button>
               </form>
             )}
@@ -155,7 +186,7 @@ export default function Contact() {
                 </p>
                 <a
                   href="tel:+13306047380"
-                  className="text-2xl font-mono font-bold text-cyan hover:text-glow transition-all"
+                  className="text-2xl font-mono font-bold text-orange-500 hover:text-glow transition-all"
                 >
                   (330) 604-7380
                 </a>
@@ -167,7 +198,7 @@ export default function Contact() {
                 </p>
                 <a
                   href="mailto:sam@216labs.dev"
-                  className="text-lg font-mono text-cyan hover:text-glow transition-all"
+                  className="text-lg font-mono text-orange-500 hover:text-glow transition-all"
                 >
                   sam@216labs.dev
                 </a>

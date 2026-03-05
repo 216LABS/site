@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="border-t border-white/5 py-12 px-6">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-2">
-          <span className="font-mono text-lg font-bold text-cyan">216</span>
+          <span className="font-mono text-lg font-bold text-orange-500">216</span>
           <span className="font-mono text-lg font-bold text-foreground">
             Labs
           </span>
@@ -13,13 +13,13 @@ export default function Footer() {
         <div className="flex items-center gap-6">
           <a
             href="mailto:sam@216labs.dev"
-            className="text-sm text-gray-500 hover:text-cyan transition-colors font-mono"
+            className="text-sm text-gray-500 hover:text-orange-500 transition-colors font-mono"
           >
             sam@216labs.dev
           </a>
           <a
             href="tel:+13306047380"
-            className="text-sm text-gray-500 hover:text-cyan transition-colors font-mono"
+            className="text-sm text-gray-500 hover:text-orange-500 transition-colors font-mono"
           >
             (330) 604-7380
           </a>
@@ -27,7 +27,7 @@ export default function Footer() {
             href="https://linkedin.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-500 hover:text-cyan transition-colors"
+            className="text-gray-500 hover:text-orange-500 transition-colors"
             aria-label="LinkedIn"
           >
             <svg
@@ -43,7 +43,7 @@ export default function Footer() {
             href="https://github.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-500 hover:text-cyan transition-colors"
+            className="text-gray-500 hover:text-orange-500 transition-colors"
             aria-label="GitHub"
           >
             <svg

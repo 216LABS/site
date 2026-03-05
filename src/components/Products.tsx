@@ -21,7 +21,7 @@ const products = [
     description:
       "Your AI answers every call, 24/7. Books appointments, answers questions, sends follow-up texts. Sounds like a real person, costs less than a part-time hire.",
     hooks: ["Never miss a call again", "Live in 48 hours", "From $297/mo"],
-    accent: "cyan",
+    accent: "orange",
   },
   {
     title: "AI Sales Agent",
@@ -86,16 +86,16 @@ const products = [
     description:
       "Don't see what you need? We build custom AI solutions from scratch. Tell us your problem.",
     hooks: ["Fully custom", "Your workflow, your AI"],
-    accent: "cyan",
+    accent: "orange",
   },
 ];
 
 const accentColors: Record<string, { text: string; border: string; bg: string; glow: string }> = {
-  cyan: {
-    text: "text-cyan",
-    border: "border-cyan/20",
-    bg: "bg-cyan/5",
-    glow: "hover:shadow-[0_0_30px_rgba(0,240,255,0.15)]",
+  orange: {
+    text: "text-orange-500",
+    border: "border-orange-500/20",
+    bg: "bg-orange-500/5",
+    glow: "hover:shadow-[0_0_30px_rgba(255,111,0,0.15)]",
   },
   magenta: {
     text: "text-magenta",
@@ -122,7 +122,7 @@ export default function Products() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="font-mono text-cyan text-sm tracking-[0.2em] uppercase mb-3">
+          <p className="font-mono text-orange-500 text-sm tracking-[0.2em] uppercase mb-3">
             What We Build
           </p>
           <h2 className="text-3xl md:text-5xl font-bold font-mono">
