@@ -91,7 +91,7 @@ const products = [
       "Real-time threat detection",
       "Compliance-ready reports",
     ],
-    accent: "green",
+    accent: "cyan",
   },
   {
     title: "AI Database Guardian",
@@ -116,7 +116,7 @@ const products = [
       "Anomaly detection",
       "Compliance enforcement",
     ],
-    accent: "magenta",
+    accent: "yellow",
   },
   {
     title: "Custom Build",
@@ -136,7 +136,7 @@ const products = [
     description:
       "Don't see what you need? We build custom AI solutions from scratch. Tell us your problem.",
     hooks: ["Fully custom", "Your workflow, your AI"],
-    accent: "orange",
+    accent: "red",
   },
 ];
 
@@ -158,6 +158,24 @@ const accentColors: Record<string, { text: string; border: string; bg: string; g
     border: "border-green/20",
     bg: "bg-green/5",
     glow: "hover:shadow-[0_0_30px_rgba(57,255,20,0.15)]",
+  },
+  cyan: {
+    text: "text-cyan-400",
+    border: "border-cyan-400/20",
+    bg: "bg-cyan-400/5",
+    glow: "hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]",
+  },
+  yellow: {
+    text: "text-yellow-400",
+    border: "border-yellow-400/20",
+    bg: "bg-yellow-400/5",
+    glow: "hover:shadow-[0_0_30px_rgba(250,204,21,0.15)]",
+  },
+  red: {
+    text: "text-red-400",
+    border: "border-red-400/20",
+    bg: "bg-red-400/5",
+    glow: "hover:shadow-[0_0_30px_rgba(248,113,113,0.15)]",
   },
 };
 
