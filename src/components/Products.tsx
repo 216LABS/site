@@ -69,6 +69,56 @@ const products = [
     accent: "green",
   },
   {
+    title: "AI Security Auditor",
+    subtitle: "VulnScan",
+    icon: (
+      <svg
+        viewBox="0 0 40 40"
+        fill="none"
+        className="w-10 h-10"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      >
+        <rect x="8" y="6" width="24" height="28" rx="2" />
+        <path d="M14 12h12M14 18h12M14 24h8" strokeLinecap="round" />
+        <path d="M32 10l-4 4M32 10l4 4" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+    description:
+      "AI-powered vulnerability scanning and penetration testing. Identifies security gaps in your custom AI solutions, APIs, and infrastructure before attackers do.",
+    hooks: [
+      "Automated penetration testing",
+      "Real-time threat detection",
+      "Compliance-ready reports",
+    ],
+    accent: "green",
+  },
+  {
+    title: "AI Database Guardian",
+    subtitle: "SafeDB",
+    icon: (
+      <svg
+        viewBox="0 0 40 40"
+        fill="none"
+        className="w-10 h-10"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      >
+        <circle cx="20" cy="14" r="8" />
+        <path d="M12 14v8c0 5.333 3.582 9 8 9s8-3.667 8-9v-8" strokeLinecap="round" />
+        <path d="M20 22v6" strokeLinecap="round" />
+      </svg>
+    ),
+    description:
+      "Monitors your databases for security anomalies, access violations, and data leaks. Trained to detect suspicious patterns and enforce compliance rules automatically.",
+    hooks: [
+      "Real-time monitoring",
+      "Anomaly detection",
+      "Compliance enforcement",
+    ],
+    accent: "magenta",
+  },
+  {
     title: "Custom Build",
     subtitle: "Your Vision",
     icon: (

@@ -196,12 +196,26 @@ export default function Contact() {
                 <p className="text-xs font-mono text-gray-500 tracking-widest uppercase mb-2">
                   Email
                 </p>
-                <a
-                  href="mailto:sam@216labs.dev"
-                  className="text-lg font-mono text-orange-500 hover:text-glow transition-all"
-                >
-                  sam@216labs.dev
-                </a>
+                <div className="space-y-2">
+                  <div>
+                    <p className="text-xs text-gray-600 mb-1">Founder</p>
+                    <a
+                      href="mailto:sam@216labs.dev"
+                      className="text-lg font-mono text-orange-500 hover:text-glow transition-all"
+                    >
+                      sam@216labs.dev
+                    </a>
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-600 mb-1">Security Lead</p>
+                    <a
+                      href="mailto:kevin@216labs.dev"
+                      className="text-lg font-mono text-orange-500 hover:text-glow transition-all"
+                    >
+                      kevin@216labs.dev
+                    </a>
+                  </div>
+                </div>
               </div>
 
               <div>
