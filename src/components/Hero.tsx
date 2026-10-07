@@ -1,4 +1,4 @@
-import { proof, site } from "@/content/site";
+import { heroNoise, site } from "@/content/site";
 import { BookingLink } from "./BookingLink";
 import SignalTrace from "./SignalTrace";
 
@@ -7,11 +7,16 @@ export default function Hero() {
     <section className="hero" aria-labelledby="hero-title">
       <div className="shell">
         <p className="hero-kicker mono">
-          <span className="live">Taking first projects now</span>
+          <span className="live">Taking first projects</span>
           <span>
-            {site.city}, {site.region} · 41.50°N 81.69°W
+            {site.city}, {site.region} · Area code 216
           </span>
-          <span>Area code 216</span>
+        </p>
+
+        <p className="hero-noise" aria-label="AI jargon you can ignore">
+          {heroNoise.map((n) => (
+            <s key={n}>{n}</s>
+          ))}
         </p>
 
         <h1 id="hero-title" className="hero-title">
@@ -24,12 +29,10 @@ export default function Hero() {
         <div className="hero-low">
           <div>
             <p className="hero-lede">
-              Phone agents that never miss a call, chatbots that answer from your own docs, and getting your business
-              recommended by ChatGPT. Built for Cleveland businesses by an engineer who spent seven years running a
-              platform that handled 5 million messages a day.
+              Phone agents, chatbots and getting found by ChatGPT. Built in {site.city}, explained in plain English.
             </p>
             <div className="hero-cta">
-              <BookingLink placement="hero">Book a 20-minute call</BookingLink>
+              <BookingLink placement="hero">Book a call</BookingLink>
               <a className="btn btn-ghost" href="#ask">
                 Try the live demo
               </a>
@@ -37,15 +40,6 @@ export default function Hero() {
           </div>
           <SignalTrace />
         </div>
-
-        <dl className="proof">
-          {proof.map((p) => (
-            <div key={p.label}>
-              <dt>{p.value}</dt>
-              <dd className="mono">{p.label}</dd>
-            </div>
-          ))}
-        </dl>
       </div>
     </section>
   );

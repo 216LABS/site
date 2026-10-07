@@ -40,6 +40,7 @@ export function CaseStudyCard({ study }: { study: Study }) {
 
 export default function CaseStudies() {
   const real = caseStudies.filter((c) => !c.illustrative);
+  if (!real.length) return null;
   return (
     <section id="results" className="section" aria-labelledby="results-title">
       <div className="shell section-grid">
@@ -47,17 +48,11 @@ export default function CaseStudies() {
         <div>
           <div className="section-head reveal">
             <h2 id="results-title" className="display h2">
-              {real.length ? "Before and after." : "What changes."}
+              Before and after.
             </h2>
-            {!real.length && (
-              <p>
-                216Labs is new, so there are no client case studies to show yet, and I won&apos;t invent any. Here is
-                the kind of before-and-after number each project is built to move.
-              </p>
-            )}
           </div>
           <div style={{ display: "grid", gap: 24 }}>
-            {caseStudies.map((c) => (
+            {real.map((c) => (
               <CaseStudyCard key={c.title} study={c} />
             ))}
           </div>

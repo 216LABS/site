@@ -1,16 +1,13 @@
-import { founders, site } from "@/content/site";
+import { founders, headings, site } from "@/content/site";
+import SectionHead, { RailLabel } from "./SectionHead";
 
 export default function Founders() {
   return (
     <section id="about" className="section" aria-labelledby="about-title">
       <div className="shell section-grid">
-        <p className="rail-label mono">Who you&apos;ll work with</p>
+        <RailLabel label="Who you'll work with" />
         <div>
-          <div className="section-head reveal">
-            <h2 id="about-title" className="display h2">
-              Engineers, not an agency.
-            </h2>
-          </div>
+          <SectionHead id="about-title" {...headings.about} />
           <div className="people">
             {founders.map((f) => (
               <article key={f.id} className="person reveal" aria-labelledby={`p-${f.id}`}>
@@ -27,16 +24,9 @@ export default function Founders() {
                 </div>
                 {f.pull && (
                   <p className="pull">
-                    I&apos;m not a marketing agency reselling someone else&apos;s tools. <em>I write the code.</em>
+                    <em>{f.pull}</em>
                   </p>
                 )}
-                <ul className="stack" aria-label="Works with">
-                  {f.stack.map((s) => (
-                    <li key={s} className="chip">
-                      {s}
-                    </li>
-                  ))}
-                </ul>
                 <p className="mono" style={{ marginTop: 18 }}>
                   <a className="link" href={`mailto:${f.email}`}>
                     {f.email}

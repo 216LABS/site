@@ -11,20 +11,19 @@ export function GET() {
 
 > ${site.description}
 
-${site.name} is an AI engineering practice in ${site.city}, ${site.regionName} (${site.category}). Founded by Sam Filipiak, who spent seven years at Trimble owning an enterprise telematics platform (about 5 million messages a day across roughly 50 enterprise accounts) and builds production AI systems at a fintech company. 216Labs writes its own code; it does not resell white-label chatbot platforms. It is new and taking on its first client projects.
+${site.name} is an AI engineering practice in ${site.city}, ${site.regionName} (${site.category}). Founded by Sam Filipiak, a software engineer who builds production AI systems and writes the code himself. It is new and taking on its first client projects.
 
 - Location: ${site.city}, ${site.region}, ${site.country}. Meets Cleveland-area clients in person and works remotely with businesses across the US.
 - Phone: ${site.phone}
 - Email: ${site.email}
-- Book a call: ${site.bookingUrl}
-- Pricing: not published; quoted after a 20-minute call.
+${site.bookingUrl ? `- Book a call: ${site.bookingUrl}\n` : ""}- Pricing: not published; depends on the project.
 
 ## Services
 
 ${services
   .map(
     (s) =>
-      `- [${s.name}](${site.url}/#${s.id}): ${s.outcome} ${s.subtitle ? `${s.subtitle} ` : ""}${s.detail} Good fit for: ${s.forWho}`,
+      `- [${s.name}](${site.url}/#${s.id}): ${s.outcome} ${s.subtitle ? `${s.subtitle} ` : ""}${s.detail}${s.forWho ? ` For: ${s.forWho}` : ""}`,
   )
   .join("\n")}
 

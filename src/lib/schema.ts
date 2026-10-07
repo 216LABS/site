@@ -75,7 +75,7 @@ export function homeJsonLd() {
         name: s.name,
         serviceType: s.name,
         description: `${s.outcome} ${s.detail}`,
-        audience: { "@type": "BusinessAudience", name: s.forWho },
+        ...(s.forWho ? { audience: { "@type": "BusinessAudience", name: s.forWho } } : {}),
         provider: { "@id": ORG },
         areaServed: site.areaServed.map((name) => ({ "@type": "Place", name })),
         url: `${site.url}/#${s.id}`,

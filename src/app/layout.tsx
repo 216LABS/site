@@ -1,14 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Atkinson_Hyperlegible_Next, Big_Shoulders, Martian_Mono } from "next/font/google";
+import { Atkinson_Hyperlegible_Next, Barlow_Condensed, Martian_Mono } from "next/font/google";
 import { site } from "@/content/site";
 import "./globals.css";
 
-const display = Big_Shoulders({
-  variable: "--font-big-shoulders",
+const display = Barlow_Condensed({
+  variable: "--font-display-face",
   subsets: ["latin"],
-  weight: ["800", "900"],
-  display: "optional", // no metric overrides exist for this face; optional avoids any swap shift
+  weight: ["700", "800"],
+  display: "swap",
 });
 
 const body = Atkinson_Hyperlegible_Next({
@@ -28,7 +28,7 @@ const mono = Martian_Mono({
 
 const title = "216Labs | AI voice agents, chatbots & AI search visibility in Cleveland";
 const description =
-  "AI phone agents, support chatbots, AI search visibility and MCP integrations for Cleveland businesses. Built and coded by an engineer who ran a 5-million-message-a-day platform. No resold chatbot tools.";
+  "AI phone agents, support chatbots, AI search visibility and MCP integrations for Cleveland businesses. Plain English, real engineering.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
