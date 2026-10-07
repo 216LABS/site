@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 216labs.dev
 
-## Getting Started
+Next.js 16 + Tailwind 4, deployed to Vercel from `main`.
 
-First, run the development server:
+## Where things live
+
+- `src/content/site.ts`: all copy (services, FAQ, process, team, case studies, booking link). The page, JSON-LD, `/llms.txt` and the chatbot's knowledge base are generated from it, so edit copy here only.
+- `src/content/posts.ts`: the writing section. Append a post object to publish.
+- `src/app/globals.css`: design tokens (light and dark) and all component styles.
+- `src/app/api/chat`: the "Ask this site" demo (Claude, streaming, grounded in `site.ts`).
+- `src/app/api/contact`: the contact form (Gmail SMTP).
+
+## Environment variables (Vercel > Settings > Environment Variables)
+
+| Name | Needed for |
+| --- | --- |
+| `ANTHROPIC_API_KEY` | Live chatbot. Set a monthly spend limit in the Anthropic Console; that is the hard cost ceiling. |
+| `CHAT_MODEL` | Optional. Defaults to `claude-opus-5-5`. |
+| `GMAIL_USER`, `GMAIL_APP_PASSWORD` | Contact form email |
+| `NEXT_PUBLIC_META_PIXEL_ID` | Meta Pixel. Fires `PageView`, `Lead` (form sent) and `Contact` (booking click or phone tap). Every event is also pushed to `window.dataLayer`. |
+
+## Reviewing chatbot answers
+
+Every question and answer is logged as one JSON line. In Vercel > Logs, search `chat_log`.
+
+## Deep links for ads and outreach
+
+`/#voice`, `/#chatbot`, `/#visibility`, `/#mcp`, `/#custom` jump to the offer and preselect it in the form. `?service=voice` also preselects it, and UTM parameters plus `fbclid` are included in the lead email.
+
+## AI crawler checks after deploying
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+curl -sL -A "GPTBot/1.2" -o /dev/null -w "%{http_code}\n" https://www.216labs.dev/
+curl -s https://www.216labs.dev/robots.txt
+curl -s https://www.216labs.dev/llms.txt | head
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Also confirm Vercel > Firewall has no rule or managed bot ruleset blocking AI crawlers.
