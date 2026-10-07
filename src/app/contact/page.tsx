@@ -1,22 +1,6 @@
-import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import { permanentRedirect } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Contact | 216Labs — Cleveland AI Solutions",
-  description:
-    "Get in touch with 216Labs. Book a call or send us a message about your AI project.",
-};
-
+// The old /contact page now lives in the homepage's booking section.
 export default function ContactPage() {
-  return (
-    <>
-      <Navbar />
-      <main className="pt-24">
-        <Contact />
-      </main>
-      <Footer />
-    </>
-  );
+  permanentRedirect("/#book");
 }

@@ -1,50 +1,87 @@
-import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import Script from "next/script";
+import { Atkinson_Hyperlegible_Next, Big_Shoulders, Martian_Mono } from "next/font/google";
+import { site } from "@/content/site";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const display = Big_Shoulders({
+  variable: "--font-big-shoulders",
   subsets: ["latin"],
+  weight: ["800", "900"],
+  display: "optional", // no metric overrides exist for this face; optional avoids any swap shift
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains",
+const body = Atkinson_Hyperlegible_Next({
+  variable: "--font-atkinson",
   subsets: ["latin"],
+  weight: ["400", "600"],
+  display: "swap",
 });
+
+const mono = Martian_Mono({
+  variable: "--font-martian",
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  display: "swap",
+  preload: false, // utility face; keep it off the critical path
+});
+
+const title = "216Labs | AI voice agents, chatbots & AI search visibility in Cleveland";
+const description =
+  "AI phone agents, support chatbots, AI search visibility and MCP integrations for Cleveland businesses. Built and coded by an engineer who ran a 5-million-message-a-day platform. No resold chatbot tools.";
 
 export const metadata: Metadata = {
-  title: "216Labs | Custom AI Solutions — Cleveland, OH",
-  description:
-    "We build custom AI phone agents, sales tools, and automation systems for businesses in Cleveland and beyond. Not a template. Not a plugin. Real AI built for your business.",
-  keywords: [
-    "AI for businesses Cleveland",
-    "AI receptionist Cleveland",
-    "AI automation Ohio",
-    "custom AI solutions",
-    "AI phone agent",
-    "216Labs",
-  ],
+  metadataBase: new URL(site.url),
+  title: { default: title, template: "%s | 216Labs" },
+  description,
+  applicationName: site.name,
+  authors: [{ name: "Sam Filipiak", url: site.linkedin }],
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "216Labs | Custom AI Solutions — Cleveland, OH",
-    description:
-      "AI phone agents, sales tools, and automation systems for businesses that don't want to miss another customer.",
     type: "website",
+    url: site.url,
+    siteName: site.name,
+    title: "AI is a lot. 216Labs makes it simple.",
+    description,
     locale: "en_US",
   },
-  robots: "index, follow",
+  twitter: {
+    card: "summary_large_image",
+    title: "AI is a lot. 216Labs makes it simple.",
+    description,
+  },
+  robots: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" },
+  category: site.category,
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ece5db" },
+    { media: "(prefers-color-scheme: dark)", color: "#17100b" },
+  ],
+};
+
+// Applies a saved theme choice before first paint so there is no flash.
+const themeScript = `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
+
+const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID?.replace(/\D/g, "");
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="dark">
-      <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground`}
-      >
+    <html lang="en" suppressHydrationWarning className={`${display.variable} ${body.variable} ${mono.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body>
+        <a className="skip" href="#main">
+          Skip to content
+        </a>
         {children}
+        {pixelId && (
+          <Script id="meta-pixel" strategy="afterInteractive">
+            {`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${pixelId}');fbq('track','PageView');`}
+          </Script>
+        )}
       </body>
     </html>
   );
