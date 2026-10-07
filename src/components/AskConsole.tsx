@@ -1,6 +1,7 @@
-import { sampleExchanges, suggestedQuestions } from "@/content/site";
+import { headings, sampleExchanges, suggestedQuestions } from "@/content/site";
 import { kbLabels } from "@/lib/knowledge";
 import AskChat from "./AskChat";
+import SectionHead, { RailLabel } from "./SectionHead";
 
 // Signature section: a live support chatbot trained only on this site.
 // The sample exchanges render on the server so crawlers and no-JS visitors
@@ -10,32 +11,14 @@ export default function AskConsole() {
   return (
     <section id="ask" className="section ask" aria-labelledby="ask-title">
       <div className="shell section-grid">
-        <p className="rail-label mono">Live demo</p>
+        <RailLabel label="Live demo" />
         <div className="ask-grid">
-          <div className="section-head reveal" style={{ marginBottom: 0 }}>
-            <h2 id="ask-title" className="display h2">
-              Ask this site anything.
-            </h2>
+          <SectionHead id="ask-title" {...headings.ask}>
             <p>
-              This is the same kind of support chatbot I build for clients, running live and trained only on this
-              website. Watch how it handles the hard part: it shows where each answer came from, and when it
-              doesn&apos;t know, it says so and hands you to a person.
+              The same kind of chatbot I build for clients, trained only on this site. It shows its sources, and when it
+              doesn&apos;t know, it says so.
             </p>
-            <dl className="ask-notes">
-              <div>
-                <dt>Grounded</dt>
-                <dd>Answers only from approved content. Every answer lists its sources.</dd>
-              </div>
-              <div>
-                <dt>Honest about gaps</dt>
-                <dd>Out-of-scope questions get a handoff, not a guess. Try asking about pricing.</dd>
-              </div>
-              <div>
-                <dt>Reviewed</dt>
-                <dd>Questions are logged so answers can be checked and the content improved.</dd>
-              </div>
-            </dl>
-          </div>
+          </SectionHead>
 
           <AskChat labels={kbLabels()} suggestions={suggestedQuestions}>
             <p className="mono console-sample-label">Sample exchanges</p>
@@ -53,7 +36,7 @@ export default function AskConsole() {
                     ))}
                   </div>
                 )}
-                {m.handoff && <p className="handoff">Handed to a person: book a call with Sam.</p>}
+                {m.handoff && <p className="handoff">Handed to a person.</p>}
               </div>
             ))}
           </AskChat>

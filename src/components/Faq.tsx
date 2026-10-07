@@ -1,17 +1,16 @@
-import { faqs } from "@/content/site";
+import { faqs, headings } from "@/content/site";
+import SectionHead, { RailLabel } from "./SectionHead";
 
-// Answer-first: each question is an H2, the direct answer comes first in
-// under 50 words, and supporting detail follows. Mirrors the FAQPage JSON-LD.
+// Answer-first: each question is an H2 and the direct answer comes first.
+// Mirrors the FAQPage JSON-LD.
 
 export default function Faq() {
   return (
     <section id="faq" className="section" aria-label="Frequently asked questions">
       <div className="shell section-grid">
-        <p className="rail-label mono">Questions</p>
+        <RailLabel label="Questions" />
         <div>
-          <p className="display h2 reveal" style={{ marginBottom: "clamp(24px,4vw,48px)" }} aria-hidden="true">
-            Straight answers.
-          </p>
+          <SectionHead id="faq-title" as="p" {...headings.faq} />
           <div className="faq">
             {faqs.map((f) => (
               <div key={f.id} id={`faq-${f.id}`} className="faq-item reveal">

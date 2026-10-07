@@ -1,22 +1,16 @@
-import { services } from "@/content/site";
+import { headings, services } from "@/content/site";
 import { BookingLink, NoteLink } from "./BookingLink";
+import SectionHead, { RailLabel } from "./SectionHead";
 
 export default function Services() {
   return (
     <section id="services" className="section" aria-labelledby="services-title">
       <div className="shell section-grid">
-        <p className="rail-label mono">What I build</p>
+        <RailLabel label="What I build" />
         <div>
-          <div className="section-head reveal">
-            <h2 id="services-title" className="display h2">
-              Plain English, <br />
-              real engineering.
-            </h2>
-            <p>
-              The AI industry names everything like a research paper. Here is what each thing actually does for you.
-              These are examples, not a menu: most projects start with a problem, not a product.
-            </p>
-          </div>
+          <SectionHead id="services-title" {...headings.services}>
+            <p>Examples, not a menu. Most projects start with a problem, not a product.</p>
+          </SectionHead>
 
           <div className="svc-list">
             {services.map((s) => (
@@ -35,17 +29,8 @@ export default function Services() {
                 </h3>
                 {s.subtitle && <p className="svc-sub">{s.subtitle}</p>}
                 <p className="svc-outcome">{s.outcome}</p>
-                <div className="svc-detail">
-                  <p>{s.detail}</p>
-                  <ul aria-label="What you get">
-                    {s.deliverables.map((d) => (
-                      <li key={d}>{d}</li>
-                    ))}
-                  </ul>
-                </div>
-                <p className="svc-for">
-                  <strong>Good fit for:</strong> {s.forWho}
-                </p>
+                <p className="svc-detail">{s.detail}</p>
+                {s.forWho && <p className="svc-for mono">For: {s.forWho}</p>}
                 <div className="svc-cta">
                   <BookingLink service={s.id} placement={`service-${s.id}`}>
                     Talk about this
@@ -54,14 +39,6 @@ export default function Services() {
                 </div>
               </article>
             ))}
-          </div>
-
-          <div className="svc-unsure reveal">
-            <p>
-              <strong>Not sure which of these you need?</strong> That&apos;s normal. Half of the first call is working it
-              out together.
-            </p>
-            <BookingLink placement="services-unsure">Book a call anyway</BookingLink>
           </div>
         </div>
       </div>

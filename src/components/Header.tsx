@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { site } from "@/content/site";
 import { BookingLink } from "./BookingLink";
+import ScrollSignal from "./ScrollSignal";
 import ThemeToggle from "./ThemeToggle";
 
 const nav = [
@@ -26,9 +28,10 @@ export default function Header() {
         </nav>
         <div className="header-actions">
           <ThemeToggle />
-          <BookingLink placement="header">Book a call</BookingLink>
+          <BookingLink placement="header">{site.bookingUrl ? "Book a call" : "Get in touch"}</BookingLink>
         </div>
       </div>
+      <ScrollSignal />
     </header>
   );
 }

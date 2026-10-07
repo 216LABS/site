@@ -1,23 +1,30 @@
-import { founders, site } from "@/content/site";
+import { founders, headings, site } from "@/content/site";
 import { BookingLink, PhoneLink } from "./BookingLink";
 import ContactForm from "./ContactForm";
+import { RailLabel } from "./SectionHead";
 
 export default function Book() {
   return (
     <section id="book" className="section book" aria-labelledby="book-title">
       <div className="shell section-grid">
-        <p className="rail-label mono">Talk to a person</p>
+        <RailLabel label="Talk to a person" />
         <div className="book-grid">
           <div>
-            <h2 id="book-title" className="display book-title">
-              Start with <br />
-              20 minutes.
-            </h2>
-            <p style={{ fontSize: "1.2rem", maxWidth: "46ch", margin: "0 0 28px" }}>
-              Pick a time that works. Bring the problem, not a spec. You&apos;ll leave knowing whether AI is worth it
-              for you, even if the answer is no.
+            <p className="noise-line">
+              <span className="sr-only">Instead of: </span>
+              <s>{headings.book.noise}</s>
             </p>
-            <BookingLink placement="book-section">Book a 20-minute call</BookingLink>
+            <h2 id="book-title" className="display book-title">
+              {headings.book.signal}
+            </h2>
+            <p style={{ fontSize: "1.2rem", maxWidth: "40ch", margin: "0 0 28px" }}>
+              Bring the problem, not a spec.
+            </p>
+            {site.bookingUrl ? (
+              <BookingLink placement="book-section">Book a call</BookingLink>
+            ) : (
+              <PhoneLink className="btn btn-primary" />
+            )}
             <dl className="contact-lines">
               <div>
                 <dt className="mono muted">Phone</dt>
@@ -36,7 +43,7 @@ export default function Book() {
               <div>
                 <dt className="mono muted">Based in</dt>
                 <dd style={{ margin: 0 }}>
-                  {site.city}, {site.regionName}. Working with businesses across the US.
+                  {site.city}, {site.regionName}
                 </dd>
               </div>
             </dl>
