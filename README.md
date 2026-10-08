@@ -17,7 +17,14 @@ Next.js 16 + Tailwind 4, deployed to Vercel from `main`.
 | `ANTHROPIC_API_KEY` | Live chatbot. Set a monthly spend limit in the Anthropic Console; that is the hard cost ceiling. |
 | `CHAT_MODEL` | Optional. Defaults to `claude-opus-5-5`. |
 | `GMAIL_USER`, `GMAIL_APP_PASSWORD` | Contact form email |
+| `XAI_API_KEY` | Browser voice demo in the `#voice` card (mints short-lived tokens; the key never reaches the browser). Set a monthly spend limit in the xAI console. |
+| `XAI_VOICE_AGENT_ID` | Optional. Run the voice demo on an agent saved in the xAI console (`agent_...`). Without it, the demo uses the prompt in `src/content/demos.ts`. |
 | `NEXT_PUBLIC_META_PIXEL_ID` | Meta Pixel. Fires `PageView`, `Lead` (form sent) and `Contact` (booking click or phone tap). Every event is also pushed to `window.dataLayer`. |
+
+## Service demos
+
+- `#voice`: browser call with an xAI voice agent (`src/components/VoiceDemo.tsx`, `src/app/api/voice-session`). Script, sample business, session cap and optional demo phone number live in `src/content/demos.ts`.
+- `#chatbot`: links to the "Ask this site" console.
 
 ## Reviewing chatbot answers
 

@@ -43,7 +43,6 @@ export const heroNoise = [
 // Per-section heading pairs: what the industry would say, then what it means.
 export const headings = {
   services: { noise: "End-to-end AI transformation solutions", signal: "What I build." },
-  ask: { noise: "Enterprise conversational AI platform", signal: "Ask this site anything." },
   process: { noise: "Discovery, ideation and agile delivery framework", signal: "How it works." },
   about: { noise: "Our team of visionary thought leaders", signal: "Who you'll work with." },
   faq: { noise: "Comprehensive knowledge resources", signal: "Straight answers." },

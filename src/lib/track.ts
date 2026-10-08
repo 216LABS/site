@@ -33,3 +33,8 @@ export function trackBookingClick(service: string, placement: string) {
 export function trackChatQuestion() {
   emit("chat_question", {}, undefined);
 }
+
+/** Visitor started the in-section voice demo. */
+export function trackDemo(demo: string) {
+  emit("demo_start", { content_category: demo }, undefined);
+}
