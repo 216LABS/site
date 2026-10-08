@@ -33,8 +33,8 @@ export default function Hero() {
             </p>
             <div className="hero-cta">
               <BookingLink placement="hero">Book a call</BookingLink>
-              <a className="btn btn-ghost" href="#ask">
-                Try the live demo
+              <a className="btn btn-ghost" href="#voice">
+                Try a live demo
               </a>
             </div>
           </div>

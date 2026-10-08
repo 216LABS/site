@@ -261,8 +261,36 @@ a { color: inherit; }
 .svc-unsure { margin-top: clamp(32px, 5vw, 56px); display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; border: 2px dashed var(--line); padding: 20px; }
 .svc-unsure p { margin: 0; font-size: 1.1rem; max-width: 52ch; }
 
-/* ---------- ask console (signature) ---------- */
-.ask { background: var(--surface); }
+/* ---------- in-card service demos (voice, chatbot) ---------- */
+.demo { margin-top: 20px; border: 2px solid var(--line); background: var(--bg); }
+.svc:target .demo, .svc.is-targeted .demo { background: var(--bg); }
+.demo-body { padding: clamp(14px, 2.5vw, 20px); display: grid; gap: 14px; }
+.demo-hint { margin: 0; color: var(--ink-2); max-width: 60ch; }
+.demo-hint.mono { color: var(--ink); }
+.demo-error { margin: 0; border-left: 4px solid var(--danger); padding: 4px 0 4px 12px; font-size: .95rem; }
+.demo-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.demo-cta .btn { min-height: 48px; }
+.svc-demo { margin-top: 20px; }
+.svc-demo .console { min-height: 380px; }
+
+.voice-stage { border-bottom: 2px solid var(--line); background: var(--surface); }
+.voice-scope { display: block; width: 100%; height: clamp(120px, 18vw, 170px); }
+.voice-legend { display: flex; justify-content: space-between; gap: .75rem; flex-wrap: wrap; padding: 8px 12px; border-top: 1px solid var(--line); color: var(--ink-2); }
+.voice-key { display: inline-flex; align-items: center; gap: .5rem; transition: color .15s var(--ease); }
+.voice-key::before { content: ""; width: 18px; height: 0; border-top: 2px solid currentColor; }
+.voice-key.is-caller::before { border-top-style: dashed; }
+.voice-key.is-agent::before { border-top-color: var(--accent); border-top-width: 3px; }
+.voice-key.is-on { color: var(--ink); }
+.voice-key.is-agent.is-on { color: var(--accent-text); }
+.voice-log { display: grid; gap: 10px; max-height: 300px; overflow-y: auto; padding-right: 4px; }
+.voice-line { margin: 0; display: grid; grid-template-columns: 4.5rem 1fr; gap: 10px; font-size: 1rem; }
+.voice-line .mono { color: var(--ink-2); padding-top: .2rem; }
+.voice-line.is-agent .mono { color: var(--accent-text); }
+.voice-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--live); }
+.voice-dot.is-speaking { background: var(--accent); animation: blink .6s steps(1) infinite; }
+
+
+/* ---------- ask console (chatbot demo, inside the #chatbot card) ---------- */
 .console { border: 2px solid var(--line); background: var(--bg); display: grid; grid-template-rows: auto 1fr auto; min-height: 420px; }
 .console-bar { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding: 10px 14px; border-bottom: 2px solid var(--line); color: var(--ink-2); }
 .console-bar .on { color: var(--ink); display: inline-flex; align-items: center; gap: .5rem; }
@@ -290,12 +318,6 @@ a { color: inherit; }
 .suggest button:hover { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .cursor { display: inline-block; width: .55em; height: 1.05em; background: var(--accent); vertical-align: -0.15em; margin-left: 2px; animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
-.ask-grid { display: grid; gap: clamp(24px, 4vw, 48px); grid-template-columns: 1fr; }
-@media (min-width: 1100px) { .ask-grid { grid-template-columns: 4fr 7fr; align-items: start; } }
-.ask-notes { display: grid; gap: 0; border-top: 2px solid var(--line); }
-.ask-notes div { padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
-.ask-notes dt { font-weight: 600; }
-.ask-notes dd { margin: 2px 0 0; color: var(--ink-2); font-size: .95rem; }
 
 /* ---------- case study ---------- */
 .case { border: 2px solid var(--line); display: grid; grid-template-columns: 1fr; }

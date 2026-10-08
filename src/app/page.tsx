@@ -1,7 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
-import AskConsole from "@/components/AskConsole";
 import CaseStudies from "@/components/CaseStudy";
 import Process from "@/components/Process";
 import Founders from "@/components/Founders";
@@ -18,7 +17,6 @@ export default function Home() {
       <main id="main">
         <Hero />
         <Services />
-        <AskConsole />
         <CaseStudies />
         <Process />
         <Founders />

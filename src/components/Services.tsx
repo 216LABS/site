@@ -1,6 +1,14 @@
-import { headings, services } from "@/content/site";
+import { headings, services, type ServiceId } from "@/content/site";
 import { BookingLink, NoteLink } from "./BookingLink";
+import AskConsole from "./AskConsole";
 import SectionHead, { RailLabel } from "./SectionHead";
+import VoiceDemo from "./VoiceDemo";
+
+// Live demos rendered inside their service card.
+const demos: Partial<Record<ServiceId, React.ReactNode>> = {
+  voice: <VoiceDemo />,
+  chatbot: <AskConsole />,
+};
 
 export default function Services() {
   return (
@@ -31,6 +39,7 @@ export default function Services() {
                 <p className="svc-outcome">{s.outcome}</p>
                 <p className="svc-detail">{s.detail}</p>
                 {s.forWho && <p className="svc-for mono">For: {s.forWho}</p>}
+                {demos[s.id]}
                 <div className="svc-cta">
                   <BookingLink service={s.id} placement={`service-${s.id}`}>
                     Talk about this
