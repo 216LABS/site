@@ -189,7 +189,8 @@ export default function VoiceDemo() {
               : {}),
             audio: {
               input: { format: { type: "audio/pcm", rate } },
-              output: { format: { type: "audio/pcm", rate } },
+              // Speed only applies to the built-in script; a saved console agent keeps its own setting.
+              output: { format: { type: "audio/pcm", rate }, ...(session.instructions ? { speed: voiceDemo.speed } : {}) },
             },
             turn_detection: { type: "server_vad" },
           },
