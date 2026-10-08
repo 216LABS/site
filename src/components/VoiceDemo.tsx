@@ -17,6 +17,16 @@ type Session = { token: string; agentId: string; instructions: string; voice: st
 
 const REALTIME_URL = "wss://api.x.ai/v1/realtime";
 
+// Client-side tool so the agent can end the call. The page hangs up once the
+// goodbye has finished playing. (A saved console agent brings its own tools.)
+const END_CALL_TOOL = {
+  type: "function",
+  name: "end_call",
+  description:
+    "Hang up the call. Use only after you have summarized next steps, the caller has nothing else, and you have said goodbye.",
+  parameters: { type: "object", properties: {}, required: [] },
+};
+
 function toBase64Pcm16(input: Float32Array): string {
   const pcm = new Int16Array(input.length);
   for (let i = 0; i < input.length; i++) {
@@ -45,6 +55,7 @@ export default function VoiceDemo() {
   const [status, setStatus] = useState<Status>("idle");
   const [lines, setLines] = useState<Line[]>([]);
   const [error, setError] = useState("");
+  const [notice, setNotice] = useState(""); // neutral end-of-call note (not an error)
   const [left, setLeft] = useState(voiceDemo.maxSeconds);
   const [speaking, setSpeaking] = useState(false);
   const [talking, setTalking] = useState(false); // caller speech detected by the server
@@ -63,6 +74,8 @@ export default function VoiceDemo() {
   const agentLine = useRef<string | null>(null);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
   const logRef = useRef<HTMLDivElement>(null);
+  const hangup = useRef<"none" | "pending" | "scheduled">("none"); // agent asked to end the call
+  const hangupTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const attempt = useRef(0); // bumps on every start/hang-up so stale async steps bail out
 
   useEffect(() => {
@@ -116,6 +129,9 @@ export default function VoiceDemo() {
 
   function teardown() {
     attempt.current++;
+    if (hangupTimer.current) clearTimeout(hangupTimer.current);
+    hangupTimer.current = null;
+    hangup.current = "none";
     if (timer.current) clearInterval(timer.current);
     timer.current = null;
     ready.current = false;
@@ -138,11 +154,20 @@ export default function VoiceDemo() {
     ctx.current = null;
   }
 
-  function end(message = "") {
+  function end(message = "", tone: "error" | "note" = "error") {
     teardown();
     setTalking(false);
-    if (message) setError(message);
+    if (message) (tone === "note" ? setNotice : setError)(message);
     setStatus("ended");
+  }
+
+  /** Ends the call once the agent's goodbye has finished playing. */
+  function hangUpAfterGoodbye() {
+    if (hangup.current === "scheduled") return;
+    hangup.current = "scheduled";
+    const ac = ctx.current;
+    const left = ac ? Math.max(0, nextAt.current - ac.currentTime) : 0;
+    hangupTimer.current = setTimeout(() => end("Jordan ended the call.", "note"), left * 1000 + 600);
   }
 
   useEffect(() => () => teardown(), []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -159,7 +184,9 @@ export default function VoiceDemo() {
         send({
           type: "session.update",
           session: {
-            ...(session.instructions ? { instructions: session.instructions, voice: session.voice } : {}),
+            ...(session.instructions
+              ? { instructions: session.instructions, voice: session.voice, tools: [END_CALL_TOOL] }
+              : {}),
             audio: {
               input: { format: { type: "audio/pcm", rate } },
               output: { format: { type: "audio/pcm", rate } },
@@ -185,7 +212,17 @@ export default function VoiceDemo() {
         break;
       case "response.done":
         agentLine.current = null;
+        // All goodbye audio has arrived by now; hang up when it finishes playing.
+        if (hangup.current === "pending") hangUpAfterGoodbye();
         break;
+      case "response.function_call_arguments.done":
+        if (msg.name === "end_call") hangup.current = "pending";
+        break;
+      case "response.output_item.done": {
+        const item = msg.item as { type?: string; name?: string } | undefined;
+        if (item?.type === "function_call" && item.name === "end_call" && hangup.current === "none") hangup.current = "pending";
+        break;
+      }
       case "input_audio_buffer.speech_started":
         stopPlayback(); // caller interrupted
         agentLine.current = null;
@@ -221,6 +258,7 @@ export default function VoiceDemo() {
   async function start() {
     if (status === "connecting" || status === "live") return;
     setError("");
+    setNotice("");
     setLines([]);
     setStatus("connecting");
     trackDemo("voice");
@@ -369,6 +407,7 @@ export default function VoiceDemo() {
         )}
 
         {error && <p className="demo-error">{error}</p>}
+        {notice && <p className="demo-note mono">{notice}</p>}
 
         <div className="demo-cta">
           {live || busy ? (
