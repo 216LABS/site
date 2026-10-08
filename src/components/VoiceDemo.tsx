@@ -236,8 +236,18 @@ export default function VoiceDemo() {
         return;
       }
       mic.current = stream;
-    } catch {
-      if (run === attempt.current) end("Microphone access was blocked. Allow the mic for this site and try again.");
+    } catch (err) {
+      if (run !== attempt.current) return;
+      const name = err instanceof DOMException ? err.name : "";
+      end(
+        name === "NotFoundError" || name === "OverconstrainedError"
+          ? "No microphone found. Plug one in, or try on your phone."
+          : name === "NotReadableError" || name === "AbortError"
+            ? "Your microphone is busy in another app (Zoom, Teams, etc.). Close it and try again."
+            : !window.isSecureContext || !navigator.mediaDevices
+              ? "This browser can't use the microphone here. Try Chrome, Edge or Safari."
+              : "Microphone access is blocked for this site. Click the icon left of the address bar, allow the microphone, then try again.",
+      );
       return;
     }
 
