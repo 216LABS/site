@@ -407,7 +407,8 @@ a { color: inherit; }
 .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .form-status { font-family: var(--font-mono); font-size: .8rem; margin: 0; }
 .form-status.err { color: var(--accent); }
-.form-done { border: 2px solid var(--accent); padding: 24px; }
+.form-done { border: 2px solid var(--accent); padding: 24px; align-self: start; }
+.form-done a { text-decoration-color: var(--accent); text-underline-offset: 4px; }
 .form-done h3 { margin: 0 0 8px; font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: 2rem; }
 
 /* ---------- footer ---------- */

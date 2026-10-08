@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { serviceIds, services } from "@/content/site";
+import { serviceIds, services, site } from "@/content/site";
 import { trackLead } from "@/lib/track";
 import { SERVICE_EVENT } from "./BookingLink";
 
@@ -70,8 +70,14 @@ export default function ContactForm() {
       <div className="form-done" role="status">
         <h3>Got it.</h3>
         <p style={{ margin: 0 }}>
-          Your note is in my inbox. I reply within one business day, usually sooner. If it&apos;s easier, grab a time on
-          the calendar too.
+          Your note is in my inbox. I reply within one business day, usually sooner.{" "}
+          {site.bookingUrl ? (
+            "If it's easier, grab a time on the calendar too."
+          ) : (
+            <>
+              Need it sooner? Call <a href={`tel:${site.phoneE164}`}>{site.phone}</a>.
+            </>
+          )}
         </p>
       </div>
     );
