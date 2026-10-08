@@ -266,6 +266,7 @@ a { color: inherit; }
 .demo-body { padding: clamp(14px, 2.5vw, 20px); display: grid; gap: 14px; }
 .demo-hint { margin: 0; color: var(--ink-2); max-width: 60ch; }
 .demo-hint.mono { color: var(--ink); }
+.demo-note { margin: 0; color: var(--ink-2); }
 .demo-error { margin: 0; border-left: 4px solid var(--danger); padding: 4px 0 4px 12px; font-size: .95rem; }
 .demo-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
 .demo-cta .btn { min-height: 48px; }
