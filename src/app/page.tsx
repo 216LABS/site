@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
@@ -7,7 +8,19 @@ import Founders from "@/components/Founders";
 import Faq from "@/components/Faq";
 import Book from "@/components/Book";
 import Footer from "@/components/Footer";
+import { homeDescription, site, socialTitle } from "@/content/site";
 import { homeJsonLd, jsonLdString } from "@/lib/schema";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: socialTitle,
+    description: homeDescription,
+    url: site.url,
+    siteName: site.name,
+    locale: "en_US",
+  },
+};
 
 export default function Home() {
   return (

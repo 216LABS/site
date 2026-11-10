@@ -4,12 +4,17 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { BookingLink } from "@/components/BookingLink";
 import { publishedPosts } from "@/content/posts";
+import { site } from "@/content/site";
+import { socialMeta } from "@/lib/meta";
+
+const description =
+  "Notes from 216Labs on AI workflow automation for small businesses, and on building AI that doesn't make things up.";
 
 export const metadata: Metadata = {
   title: "Writing",
-  description:
-    "Technical notes from 216Labs on getting cited in AI answers, AI crawler access, structured data, and building AI systems that don't make things up.",
+  description,
   alternates: { canonical: "/writing" },
+  ...socialMeta({ title: "Writing | 216Labs", description, url: `${site.url}/writing` }),
 };
 
 export default function WritingIndex() {
@@ -23,7 +28,7 @@ export default function WritingIndex() {
             <p className="mono muted">Writing</p>
             <h1 className="display">Field notes.</h1>
             <p style={{ fontSize: "1.2rem", maxWidth: "56ch", margin: "16px 0 0" }}>
-              Technical write-ups on getting your business cited in AI answers, and on building AI that tells the truth.
+              Notes on putting AI into a real workflow, and on building systems that don&apos;t make things up.
             </p>
           </div>
         </div>

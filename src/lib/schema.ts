@@ -1,4 +1,5 @@
-import { faqs, founders, services, site } from "@/content/site";
+import { automationPage } from "@/content/pages";
+import { faqs, founders, paths, services, site, type Service } from "@/content/site";
 
 const ORG = `${site.url}/#org`;
 const BUSINESS = `${site.url}/#business`;
@@ -12,6 +13,89 @@ const address = {
 };
 
 const sameAs = [site.linkedin, site.github].filter(Boolean);
+
+const areaServed = () => site.areaServed.map((name) => ({ "@type": "Place" as const, name }));
+
+function serviceNode(s: Service, serviceType?: string) {
+  return {
+    "@type": "Service" as const,
+    "@id": `${site.url}/#${s.id}`,
+    name: s.name,
+    serviceType: serviceType ?? s.name,
+    description: `${s.outcome} ${s.detail}`,
+    ...(s.forWho ? { audience: { "@type": "BusinessAudience" as const, name: s.forWho } } : {}),
+    provider: { "@id": ORG },
+    areaServed: areaServed(),
+    url: s.id === "voice" ? `${site.url}${paths.voice}` : `${site.url}/#${s.id}`,
+  };
+}
+
+export function voiceServiceNode() {
+  const voice = services.find((s) => s.id === "voice");
+  if (!voice) throw new Error("missing voice service");
+  return serviceNode(voice, "After-hours AI answering service");
+}
+
+export function automationServiceNode() {
+  return {
+    "@type": "Service" as const,
+    "@id": `${site.url}${paths.automation}#service`,
+    name: "AI Workflow Automation",
+    serviceType: "AI workflow automation for small businesses",
+    description: automationPage.summary,
+    audience: { "@type": "BusinessAudience" as const, name: "Small businesses" },
+    provider: { "@id": ORG },
+    areaServed: areaServed(),
+    url: `${site.url}${paths.automation}`,
+  };
+}
+
+type PageSchema = {
+  path: string;
+  title: string;
+  description: string;
+  crumb: string;
+  faqs: { q: string; a: string }[];
+};
+
+export function pageGraph(page: PageSchema, service?: { "@id": string }) {
+  const url = `${site.url}${page.path}`;
+  const breadcrumbId = `${url}#breadcrumb`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": url,
+        url,
+        name: page.title,
+        description: page.description,
+        isPartOf: { "@id": `${site.url}/#website` },
+        about: { "@id": BUSINESS },
+        ...(service ? { mainEntity: { "@id": service["@id"] } } : {}),
+        breadcrumb: { "@id": breadcrumbId },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": breadcrumbId,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+          { "@type": "ListItem", position: 2, name: page.crumb, item: url },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${url}#faq`,
+        mainEntity: page.faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
+      ...(service ? [service] : []),
+    ],
+  };
+}
 
 export function homeJsonLd() {
   const sam = founders[0];
@@ -39,12 +123,12 @@ export function homeJsonLd() {
         founder: { "@id": SAM },
         sameAs,
         knowsAbout: [
+          "AI workflow automation",
           "AI voice agents",
           "AI chatbots",
           "Retrieval-augmented generation",
           "Generative engine optimization",
           "Model Context Protocol",
-          "Workflow automation",
         ],
       },
       {
@@ -58,7 +142,7 @@ export function homeJsonLd() {
         description: site.description,
         address,
         geo: { "@type": "GeoCoordinates", latitude: site.geo.lat, longitude: site.geo.lng },
-        areaServed: site.areaServed.map((name) => ({ "@type": "Place", name })),
+        areaServed: areaServed(),
         parentOrganization: { "@id": ORG },
         hasOfferCatalog: {
           "@type": "OfferCatalog",
@@ -69,17 +153,7 @@ export function homeJsonLd() {
           })),
         },
       },
-      ...services.map((s) => ({
-        "@type": "Service",
-        "@id": `${site.url}/#${s.id}`,
-        name: s.name,
-        serviceType: s.name,
-        description: `${s.outcome} ${s.detail}`,
-        ...(s.forWho ? { audience: { "@type": "BusinessAudience", name: s.forWho } } : {}),
-        provider: { "@id": ORG },
-        areaServed: site.areaServed.map((name) => ({ "@type": "Place", name })),
-        url: `${site.url}/#${s.id}`,
-      })),
+      ...services.map((s) => (s.id === "voice" ? voiceServiceNode() : serviceNode(s))),
       {
         "@type": "Person",
         "@id": SAM,

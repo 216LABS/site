@@ -1,4 +1,5 @@
-import { headings, services, type ServiceId } from "@/content/site";
+import Link from "next/link";
+import { headings, paths, services, type ServiceId } from "@/content/site";
 import { BookingLink, NoteLink } from "./BookingLink";
 import AskConsole from "./AskConsole";
 import SectionHead, { RailLabel } from "./SectionHead";
@@ -17,7 +18,10 @@ export default function Services() {
         <RailLabel label="What I build" />
         <div>
           <SectionHead id="services-title" {...headings.services}>
-            <p>Examples, not a menu. Most projects start with a problem, not a product.</p>
+            <p>
+              Examples, not a menu. Most projects start with a problem, not a product.{" "}
+              <Link href={paths.automation}>How AI workflow automation works</Link>.
+            </p>
           </SectionHead>
 
           <div className="svc-list">
@@ -39,6 +43,13 @@ export default function Services() {
                 <p className="svc-outcome">{s.outcome}</p>
                 <p className="svc-detail">{s.detail}</p>
                 {s.forWho && <p className="svc-for mono">For: {s.forWho}</p>}
+                {s.href && s.hrefLabel && (
+                  <p className="svc-more">
+                    <Link href={s.href} className="link">
+                      {s.hrefLabel} <span aria-hidden="true">→</span>
+                    </Link>
+                  </p>
+                )}
                 {demos[s.id]}
                 <div className="svc-cta">
                   <BookingLink service={s.id} placement={`service-${s.id}`}>

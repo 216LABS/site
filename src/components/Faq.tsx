@@ -1,8 +1,35 @@
-import { faqs, headings } from "@/content/site";
+import { faqs, headings, type Faq } from "@/content/site";
 import SectionHead, { RailLabel } from "./SectionHead";
 
 // Answer-first: each question is an H2 and the direct answer comes first.
 // Mirrors the FAQPage JSON-LD.
+
+export function FaqList({ items }: { items: Faq[] }) {
+  return (
+    <div className="faq">
+      {items.map((f) => (
+        <div key={f.id} id={`faq-${f.id}`} className="faq-item reveal">
+          <h2 className="faq-q">{f.q}</h2>
+          <div className="faq-a">
+            <p className="answer">{f.a}</p>
+            {f.detail && (
+              <ul>
+                {f.detail.map((d) => {
+                  const [lead, ...rest] = d.split(". ");
+                  return (
+                    <li key={d}>
+                      <strong>{lead}.</strong> {rest.join(". ")}
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function Faq() {
   return (
@@ -11,28 +38,7 @@ export default function Faq() {
         <RailLabel label="Questions" />
         <div>
           <SectionHead id="faq-title" as="p" {...headings.faq} />
-          <div className="faq">
-            {faqs.map((f) => (
-              <div key={f.id} id={`faq-${f.id}`} className="faq-item reveal">
-                <h2 className="faq-q">{f.q}</h2>
-                <div className="faq-a">
-                  <p className="answer">{f.a}</p>
-                  {f.detail && (
-                    <ul>
-                      {f.detail.map((d) => {
-                        const [lead, ...rest] = d.split(". ");
-                        return (
-                          <li key={d}>
-                            <strong>{lead}.</strong> {rest.join(". ")}
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
+          <FaqList items={faqs} />
         </div>
       </div>
     </section>

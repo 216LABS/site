@@ -10,17 +10,18 @@ export const site = {
   url: "https://www.216labs.dev",
   tagline: "AI is a lot. I'll make it simple.",
   description:
-    "216Labs builds AI phone agents, support chatbots, AI search visibility and MCP integrations for Cleveland businesses. Plain English, real engineering.",
+    "216Labs implements AI in small-business workflows: intake, quoting, follow-ups, scheduling, reporting, documents, and the tools you already use. Based in Lakewood, Ohio, in the Cleveland area. Plain English, real engineering.",
   category: "AI engineering and automation consultancy",
   phone: "(330) 604-7380",
   phoneE164: "+13306047380",
   email: "sam@216labs.dev",
-  city: "Cleveland",
+  city: "Lakewood",
   region: "OH",
   regionName: "Ohio",
   country: "US",
-  geo: { lat: 41.4993, lng: -81.6944 },
-  areaServed: ["Cleveland", "Cuyahoga County", "Ohio", "United States"],
+  // Lakewood city center, not a street address.
+  geo: { lat: 41.482, lng: -81.7982 },
+  areaServed: ["Lakewood", "Cleveland", "Cuyahoga County", "Northeast Ohio", "Ohio", "United States"],
   // Google Calendar appointment-schedule booking page. Leave empty until you have one:
   // every "Book a call" button then jumps to the contact section instead.
   // Get it from Google Calendar > Create > Appointment schedule > open it > Share > copy link.
@@ -29,6 +30,21 @@ export const site = {
   linkedin: "https://www.linkedin.com/in/samuel-filipiak",
   github: "", // add a GitHub profile URL to show it in the footer
 };
+
+// Canonical paths for the service and location pages.
+export const paths = {
+  automation: "/ai-automation",
+  consulting: "/ai-consulting-cleveland",
+  voice: "/after-hours-voice-agent",
+} as const;
+
+export const heroLede =
+  "I put AI into the work you already do: intake, quotes, follow-ups, documents, and the tools on your desk. Built in Lakewood, Ohio, explained in plain English.";
+
+export const homeTitle = "AI Consulting & Workflow Automation in Cleveland, Ohio | 216Labs";
+export const homeDescription =
+  "AI consulting and workflow automation for Cleveland and Lakewood businesses. Intake, follow-ups, documents, scheduling, and the tools you already use. Built in Lakewood, Ohio. Plain English, real engineering.";
+export const socialTitle = "AI is a lot. 216Labs makes it simple.";
 
 // The jargon the hero strikes through before the headline.
 export const heroNoise = [
@@ -59,6 +75,8 @@ export type Service = {
   outcome: string; // the one concrete promise
   detail: string;
   forWho?: string;
+  href?: string;
+  hrefLabel?: string;
 };
 
 export const services: Service[] = [
@@ -69,6 +87,8 @@ export const services: Service[] = [
     outcome: "Never miss a call again.",
     detail: "It answers 24/7, books appointments, answers common questions and texts a follow-up.",
     forWho: "Contractors, clinics and small practices.",
+    href: paths.voice,
+    hrefLabel: "Read how an after-hours agent works",
   },
   {
     id: "chatbot",
@@ -101,7 +121,10 @@ export const services: Service[] = [
     name: "Custom Build",
     jargon: "Bespoke agentic workflows and LLM orchestration pipelines",
     outcome: "Tell me the problem.",
-    detail: "Document extraction, order intake, internal search, workflow automation. If it's AI and it's real engineering, it fits here.",
+    detail:
+      "Workflow automation for the work you already do: intake, follow-ups, documents, scheduling, and connecting your tools. Document extraction, order intake, and internal search fit here too.",
+    href: paths.automation,
+    hrefLabel: "Read how an automation project works",
   },
 ];
 
@@ -144,7 +167,17 @@ export const faqs: Faq[] = [
   {
     id: "location",
     q: "Do you only work with Cleveland businesses?",
-    a: "No. 216Labs is based in Cleveland and works with businesses anywhere.",
+    a: "No. 216Labs is based in Lakewood, Ohio, in the Cleveland area. I meet Cleveland-area clients in person and work remotely with businesses anywhere in the US.",
+  },
+  {
+    id: "where",
+    q: "Are you in Cleveland or Lakewood?",
+    a: "Lakewood, in the Cleveland area. The 216 area code is the name. I meet people in person around Cleveland and work remotely elsewhere.",
+  },
+  {
+    id: "app-vs-custom",
+    q: "How is this different from a monthly AI receptionist app?",
+    a: "Those are self-serve products. I build a phone agent around your business: your hours, your services, the questions you actually get, and the handoff to a person when it is not sure. I run it with you. Pricing depends on the project, so it is not listed here.",
   },
 ];
 
@@ -155,6 +188,9 @@ export const process = [
   { when: "Approve", title: "You sign off", body: "You test it and approve what it says." },
   { when: "Live", title: "It switches on", body: "And I keep watching it." },
 ];
+
+export const outOfScope =
+  "I do not take on real estate, mortgage, lending, title, or proptech projects.";
 
 export const founders = [
   {

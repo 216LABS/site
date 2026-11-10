@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { site } from "@/content/site";
+import { paths, site } from "@/content/site";
 import { PhoneLink } from "./BookingLink";
 
 export default function Footer() {
@@ -23,6 +23,9 @@ export default function Footer() {
               GitHub
             </a>
           )}
+          <Link href={paths.automation}>AI automation</Link>
+          <Link href={paths.voice}>Voice agents</Link>
+          <Link href={paths.consulting}>Cleveland</Link>
           <Link href="/writing">Writing</Link>
           <a href="/llms.txt">llms.txt</a>
         </nav>
