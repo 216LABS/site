@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 // Share card. Images have no theme, so the brand colors are literal here;
 // they mirror the dark-theme tokens in globals.css.
-export const alt = "216Labs: AI is a lot. I'll make it simple. AI engineering in Cleveland.";
+export const alt = "216Labs: AI is a lot. I'll make it simple. AI engineering in Lakewood, Ohio.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -27,7 +27,7 @@ export default function OgImage() {
             <span style={{ background: "#ff6a1a", color: "#17100b", padding: "0 10px" }}>216</span>
             <span style={{ paddingLeft: 4 }}>LABS</span>
           </div>
-          <span style={{ color: "#bba894" }}>CLEVELAND, OH</span>
+          <span style={{ color: "#bba894" }}>LAKEWOOD, OH</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", fontWeight: 900, fontSize: 120, lineHeight: 0.92 }}>
           <span style={{ color: "#bba894" }}>AI IS A LOT.</span>

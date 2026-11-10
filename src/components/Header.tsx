@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { site } from "@/content/site";
+import { paths, site } from "@/content/site";
 import { BookingLink } from "./BookingLink";
 import ThemeToggle from "./ThemeToggle";
 
 const nav = [
   { href: "/#services", label: "What I build" },
+  { href: paths.automation, label: "Automation" },
   { href: "/#voice", label: "Live demos" },
   { href: "/#next", label: "How it works" },
   { href: "/#faq", label: "FAQ" },

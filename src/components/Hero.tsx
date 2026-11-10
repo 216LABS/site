@@ -1,4 +1,5 @@
-import { heroNoise, site } from "@/content/site";
+import Link from "next/link";
+import { heroLede, heroNoise, paths, site } from "@/content/site";
 import { BookingLink } from "./BookingLink";
 import SignalTrace from "./SignalTrace";
 
@@ -28,8 +29,11 @@ export default function Hero() {
 
         <div className="hero-low">
           <div>
-            <p className="hero-lede">
-              Phone agents, chatbots and getting found by ChatGPT. Built in {site.city}, explained in plain English.
+            <p className="hero-lede">{heroLede}</p>
+            <p className="hero-note">
+              <Link href={paths.automation}>AI workflow automation</Link>
+              {" for "}
+              <Link href={paths.consulting}>Cleveland-area businesses</Link>.
             </p>
             <div className="hero-cta">
               <BookingLink placement="hero">Book a call</BookingLink>

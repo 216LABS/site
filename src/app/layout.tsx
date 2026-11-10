@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Atkinson_Hyperlegible_Next, Barlow_Condensed, Martian_Mono } from "next/font/google";
-import { site } from "@/content/site";
+import { homeDescription, homeTitle, site, socialTitle } from "@/content/site";
 import "./globals.css";
 
 const display = Barlow_Condensed({
@@ -26,9 +26,8 @@ const mono = Martian_Mono({
   preload: false, // utility face; keep it off the critical path
 });
 
-const title = "216Labs | AI voice agents, chatbots & AI search visibility in Cleveland";
-const description =
-  "AI phone agents, support chatbots, AI search visibility and MCP integrations for Cleveland businesses. Plain English, real engineering.";
+const title = homeTitle;
+const description = homeDescription;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -39,15 +38,14 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    url: site.url,
     siteName: site.name,
-    title: "AI is a lot. 216Labs makes it simple.",
+    title: socialTitle,
     description,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI is a lot. 216Labs makes it simple.",
+    title: socialTitle,
     description,
   },
   robots: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" },

@@ -1,4 +1,5 @@
-import { faqs, founders, process, services, site } from "@/content/site";
+import { sitePages } from "@/content/pages";
+import { faqs, founders, outOfScope, process, services, site } from "@/content/site";
 
 // Builds the chatbot's knowledge base from the same content the page renders.
 // Each section has a stable id the model cites, and a human label the UI shows.
@@ -10,8 +11,13 @@ export function knowledgeBase(): KbSection[] {
     {
       id: "about",
       label: "About 216Labs",
-      text: `${site.name} is an AI engineering practice based in ${site.city}, ${site.regionName}, founded by Sam Filipiak, a software engineer who builds production AI systems and writes the code himself. ${site.description} 216Labs is new and is taking on its first client projects; it has no past client results to cite yet. Pricing is not published; it depends on the project. Timelines depend on the project; a plan is agreed before work starts.`,
+      text: `${site.name} is an AI engineering practice based in Lakewood, Ohio, in the Cleveland area, founded by Sam Filipiak, a software engineer who implements AI in small-business workflows and writes the code himself. Voice agents and chatbots are one entry service, not the whole practice. ${site.description} 216Labs is new and is taking on its first client projects; it has no past client results to cite yet. Pricing is not published; it depends on the project. Timelines depend on the project; a plan is agreed before work starts. ${outOfScope} No street address is published.`,
     },
+    ...sitePages.map((p) => ({
+      id: `page-${p.path.replaceAll("/", "")}`,
+      label: p.h1,
+      text: `${p.h1} (${site.url}${p.path}): ${p.summary}\n${p.faqs.map((f) => `Q: ${f.q}\nA: ${f.a}`).join("\n")}`,
+    })),
     ...services.map((s) => ({
       id: `svc-${s.id}`,
       label: s.name,
@@ -41,7 +47,7 @@ export function knowledgeBase(): KbSection[] {
     {
       id: "contact",
       label: "Contact",
-      text: `${site.bookingUrl ? `Book a call: ${site.bookingUrl}.` : "Use the contact form at the bottom of this page."} Phone: ${site.phone}. Email: ${site.email}. Based in ${site.city}, ${site.region}; works remotely with businesses across the US.`,
+      text: `${site.bookingUrl ? `Book a call: ${site.bookingUrl}.` : "Use the contact form at the bottom of the homepage."} Phone: ${site.phone}. Email: ${site.email}. Based in Lakewood, Ohio, in the Cleveland area. No street address or postal code is published. Meets Cleveland-area clients in person and works remotely with businesses across the US.`,
     },
   ];
 }

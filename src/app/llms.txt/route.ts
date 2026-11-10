@@ -1,4 +1,5 @@
-import { faqs, founders, process, services, site } from "@/content/site";
+import { faqs, founders, outOfScope, process, services, site } from "@/content/site";
+import { sitePages } from "@/content/pages";
 import { publishedPosts } from "@/content/posts";
 
 export const dynamic = "force-static";
@@ -11,19 +12,23 @@ export function GET() {
 
 > ${site.description}
 
-${site.name} is an AI engineering practice in ${site.city}, ${site.regionName} (${site.category}). Founded by Sam Filipiak, a software engineer who builds production AI systems and writes the code himself. It is new and taking on its first client projects.
+${site.name} is an AI engineering practice based in Lakewood, Ohio, in the Cleveland area (${site.category}). Founded by Sam Filipiak, a software engineer who implements AI in small-business workflows and writes the code himself. Voice agents and chatbots are one entry service, not the whole practice. It is new and taking on its first client projects. There are no past client results to cite. ${outOfScope} No street address is published.
 
-- Location: ${site.city}, ${site.region}, ${site.country}. Meets Cleveland-area clients in person and works remotely with businesses across the US.
+- Location: ${site.city}, ${site.region}, ${site.country}. In the Cleveland area. Meets Cleveland-area clients in person and works remotely with businesses across the US.
 - Phone: ${site.phone}
 - Email: ${site.email}
 ${site.bookingUrl ? `- Book a call: ${site.bookingUrl}\n` : ""}- Pricing: not published; depends on the project.
+
+## Pages
+
+${sitePages.map((p) => `- [${p.h1}](${site.url}${p.path}): ${p.summary}`).join("\n")}
 
 ## Services
 
 ${services
   .map(
     (s) =>
-      `- [${s.name}](${site.url}/#${s.id}): ${s.outcome} ${s.subtitle ? `${s.subtitle} ` : ""}${s.detail}${s.forWho ? ` For: ${s.forWho}` : ""}`,
+      `- [${s.name}](${site.url}${s.href ?? `/#${s.id}`}): ${s.outcome} ${s.subtitle ? `${s.subtitle} ` : ""}${s.detail}${s.forWho ? ` For: ${s.forWho}` : ""}`,
   )
   .join("\n")}
 
